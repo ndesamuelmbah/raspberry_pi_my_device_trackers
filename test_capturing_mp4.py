@@ -14,7 +14,7 @@ encoders = {"H264Encoder": H264Encoder(10000000), "JpegEncoder": JpegEncoder(100
 for name, encoder in encoders.items():
     encoder = H264Encoder(10000000)
     print(f'{name} {datetime.now()} Set up the time: ')
-    output = FfmpegOutput('test_{name}.mp4', audio=False)
+    output = FfmpegOutput(f'test_{name}.mp4', audio=False)
 
     print(f'{name} {datetime.now()} Set up the output: ')
 
