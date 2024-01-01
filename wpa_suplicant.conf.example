@@ -1,0 +1,10 @@
+country=US
+ctrl_interface=/var/run/wpa_supplicant
+update_config=1
+
+network={
+	scan_ssid=1
+    ssid="Your Wifi Name"
+    psk="Your Strong Wifi Password"
+	key_mgmt=WPA-PSK
+}
