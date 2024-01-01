@@ -15,6 +15,7 @@ while True:
         print("Already capturing!")
         continue
     picam2 = Picamera2()
+    Picamera2.set_logging(Picamera2.ERROR)
     print("Motion detected!")
     time_now = datetime.utcnow()
     file_name = str(time_now).replace(' ', '_') + ".mp4"
