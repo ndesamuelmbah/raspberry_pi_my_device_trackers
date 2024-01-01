@@ -5,6 +5,7 @@ from picamera2 import Picamera2
 from upload_to_s3 import upload_file_to_s3
 import time, os, sys
 from datetime import datetime, timedelta
+Picamera2.set_logging(Picamera2.ERROR)
 
 pir = MotionSensor(12)
 is_capturing = False
@@ -15,8 +16,8 @@ while True:
         print("Already capturing!")
         continue
     picam2 = Picamera2()
-    #Picamera2.set_logging(Picamera2.ERROR)
-    picam2.set_logging(Picamera2.ERROR)
+    # Picamera2.set_logging(Picamera2.ERROR)
+    # picam2.set_logging(Picamera2.ERROR)
     print("Motion detected!")
     time_now = datetime.utcnow()
     file_name = str(time_now).replace(' ', '_') + ".mp4"
