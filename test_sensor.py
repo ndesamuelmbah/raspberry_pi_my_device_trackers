@@ -16,8 +16,6 @@ while True:
         print("Already capturing!")
         continue
     picam2 = Picamera2()
-    # Picamera2.set_logging(Picamera2.ERROR)
-    # picam2.set_logging(Picamera2.ERROR)
     print("Motion detected!")
     time_now = datetime.utcnow()
     file_name = str(time_now).replace(' ', '_') + ".mp4"
@@ -33,8 +31,7 @@ while True:
     is_capturing = True
     picam2.start_recording(encoder, output)
     pir.wait_for_no_motion()
-    print(f'{name} {datetime.now()} Started Recording: ')
-    print(f'{name} {datetime.now()} Recording for 10 seconds:')
+    print(f'{name} {datetime.now()} Recording completed after {timedelta(datetime.now()-time_now).total_seconds()} seconds')
     picam2.stop_recording()
     picam2.close()
     is_capturing = False
