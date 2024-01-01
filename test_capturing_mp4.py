@@ -12,7 +12,7 @@ picam2.configure(video_config)
 print(f'{datetime.now()}: Video configuration:')
 encoder = H264Encoder(10000000)
 print(f'{datetime.now()} Set up the time: ')
-output = FfmpegOutput('test.mp4', audio=True)
+output = FfmpegOutput('test.mp4', audio=False)
 
 print(f'{datetime.now()} Set up the output: ')
 
