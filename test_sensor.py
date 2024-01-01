@@ -7,9 +7,13 @@ import time, os, sys
 from datetime import datetime, timedelta
 
 pir = MotionSensor(12)
+is_capturing = False
 while True:
     print("Waiting for motion...")
     pir.wait_for_motion()
+    if(is_capturing):
+        print("Already capturing!")
+        continue
     picam2 = Picamera2()
     print("Motion detected!")
     time_now = datetime.utcnow()

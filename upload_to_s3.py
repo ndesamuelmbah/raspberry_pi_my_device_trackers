@@ -27,7 +27,7 @@ def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool =Fa
     s3_url = f'{s3_base_url}/{s3_object_key}'
 
     if debug:
-        print(f'The file {local_file_path} has been uploaded to {s3_object_key} in {bucket_name}.')
+        print(f'The file {local_file_path} has been uploaded to {s3_object_key} in {bucket_name} with full url {s3_url}.')
     # write code to delete the file from the local file system
     os.remove(local_file_path)
     if debug:
