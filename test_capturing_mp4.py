@@ -23,4 +23,5 @@ for name, encoder in encoders.items():
     time.sleep(10)
     print(f'{name} {datetime.now()} Recording for 10 seconds:')
     picam2.stop_recording()
+    time.sleep(1)
     print(f'{name} {datetime.now()} Recording for 10 seconds AND Done:')
