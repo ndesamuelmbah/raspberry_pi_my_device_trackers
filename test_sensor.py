@@ -33,6 +33,7 @@ while True:
     print(f'{name} {datetime.now()} Started Recording: ')
     print(f'{name} {datetime.now()} Recording for 10 seconds:')
     picam2.stop_recording()
+    picam2.close()
     is_capturing = False
     time.sleep(0.5)
     upload_file_to_s3(local_file_path=file_name, post_time=time_now, debug=True)
