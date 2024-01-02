@@ -24,7 +24,7 @@ def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool =Tr
     # Upload the file to S3
     s3.upload_file(local_file_path, bucket_name, s3_object_key)
     s3_base_url  = env['S3_BASE_URL']
-    s3_url = f'{s3_base_url}/{s3_object_key}'
+    s3_url = f'{s3_base_url}{s3_object_key}'
 
     if debug:
         print(f'The file {local_file_path} has been uploaded to {s3_object_key} in {bucket_name} with full url {s3_url}.')
