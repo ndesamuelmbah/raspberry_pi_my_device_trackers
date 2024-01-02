@@ -23,7 +23,7 @@ def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool =Fa
     s3_object_key = f'{user_name}/{file_name}'
     # Upload the file to S3
     s3.upload_file(local_file_path, bucket_name, s3_object_key)
-    s3_base_url  = os.environ['S3_BASE_URL']
+    s3_base_url  = env['S3_BASE_URL']
     s3_url = f'{s3_base_url}/{s3_object_key}'
 
     if debug:
@@ -33,13 +33,14 @@ def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool =Fa
     if debug:
         print(f'The file {local_file_path} has been deleted from the local file system.')
     # write code to make a POST request to the API Gateway endpoint
-    post_url = os.environ['POST_URL']
+    post_url = env['POST_URL']
     post_data = {
         'sensorMediaData':
         {
             'dateTimeString': str(post_time),
             's3Url': s3_url,
             'userName': user_name,
+            'email': env['EMAIL'],
             'description': "Samuel's Raspberry Pi Noticed A Motion Event."
         }
     }
