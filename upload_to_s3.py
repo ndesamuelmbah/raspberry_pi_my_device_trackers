@@ -8,7 +8,7 @@ user_name = env['BOTO3_USER']
 post_header = env['POST_HEADER']
 
 
-def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool =False):
+def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool =True):
     '''Uploads a file to S3 to the path specified by BOTO3_USER saved on the device in environment variables.
     in the bucket specified by BUCKET_NAME fetched from environment variables.
     local_file_path: The path to the file to upload to S3.
