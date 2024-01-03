@@ -1,27 +1,25 @@
 from gpiozero import MotionSensor
-from picamera2.encoders import H264Encoder, JpegEncoder, MJPEGEncoder
+from picamera2.encoders import H264Encoder
 from picamera2.outputs import FfmpegOutput
 from picamera2 import Picamera2
 from upload_to_s3 import upload_file_to_s3
-import time, os, sys
-from datetime import datetime, timedelta
+import time
+from datetime import datetime
 Picamera2.set_logging(Picamera2.ERROR)
 
 pir = MotionSensor(12)
 is_capturing = False
 while True:
-    print("Waiting for motion...")
+    # print("Waiting for motion...")
     pir.wait_for_motion()
     if(is_capturing):
-        print("Already capturing!")
         continue
     picam2 = Picamera2()
-    print("Motion detected!")
+    print(f"{datetime.now()}: Motion detected!")
     time_now = datetime.utcnow()
     file_name = str(time_now).replace(' ', '_').replace('-','_').replace(':', '_') + ".mp4"
     video_config = picam2.create_video_configuration()
     picam2.configure(video_config)
-    print(f'{datetime.now()}: Video configuration:')
     encoder = H264Encoder(10000000)
     name = "H264Encoder"
     print(f'{name} {datetime.now()} Set up the time: ')
@@ -35,7 +33,7 @@ while True:
     picam2.stop_recording()
     picam2.close()
     is_capturing = False
-    time.sleep(0.5)
+    time.sleep(1)
     upload_file_to_s3(local_file_path=file_name, post_time=time_now, debug=True)
-    print(f'{name} {datetime.now()} Recording for 10 seconds AND Done:')
-    print("Motion stopped!")
+
+    print(f"{datetime.now()}: Motion stopped!")
