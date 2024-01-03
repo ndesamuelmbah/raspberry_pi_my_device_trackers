@@ -7,8 +7,28 @@ bucket_name = env['BUCKET_NAME']
 user_name = env['BOTO3_USER']
 post_header = env['POST_HEADER']
 
+def notify_motion_detected(debug: bool = False):
+    '''Sends a POST request to the API Gateway endpoint to notify of a motion event.
+    Exceptions: Throws an invalid argument exception if BOTO3_USER or BUCKET_NAME are not set.
+    Returns: None
+    '''
+    post_url = env['POST_URL']
+    post_data = {
+        'sensorMediaData':
+        {
+            'dateTimeString': str(datetime.utcnow()),
+            'userName': user_name,
+            'email': env['EMAIL'],
+            'description': "Samuel's Raspberry Pi Noticed A Motion Event."
+        }
+    }
+    headers = { 'header': post_header}
+    response = requests.post(post_url, headers=headers, json=post_data)
+    if debug:
+        print(f'The POST request to {post_url} returned {response.status_code} with the body {response.text}.')
 
-def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool =True):
+
+def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool = False):
     '''Uploads a file to S3 to the path specified by BOTO3_USER saved on the device in environment variables.
     in the bucket specified by BUCKET_NAME fetched from environment variables.
     local_file_path: The path to the file to upload to S3.
