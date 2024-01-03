@@ -1,0 +1,7 @@
+# /etc/your_service_name/your_service_name.conf
+POST_HEADER=SAMPLE_SERVICE_PRINCIPAL_RECOGNIZABLE_BY_YOU_SERVICE
+S3_BASE_URL=https://my_s3_bucket_name.s3.YOUR-AWS-REGION.amazonaws.com/
+BOTO3_USER=username_for_determining_folder_to_save_media
+POST_URL=https://my_api_domain.com/your_end_point
+BUCKET_NAME=my_s3_bucket_name
+EMAIL=example@domain.com

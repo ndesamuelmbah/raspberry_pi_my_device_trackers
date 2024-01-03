@@ -1,0 +1,17 @@
+# /etc/systemd/system/your_service_name.service
+
+[Unit]
+Description=My Python Project to Monitor Motion in Garage
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python /home/username_of_account_to_run_service/raspberry_pi_my_device_trackers/capture_video_with_sensor.py
+WorkingDirectory=/home/username_of_account_to_run_service/raspberry_pi_my_device_trackers/
+EnvironmentFile=/etc/your_service_name/your_service_name.conf
+Restart=always
+User=username_of_account_to_run_service
+StandardOutput=append:/var/log/your_service_name/your_service_name.out.log
+StandardError=append:/var/log/your_service_name/your_service_name.err.log
+
+[Install]
+WantedBy=default.target
