@@ -18,7 +18,7 @@ while True:
     picam2 = Picamera2()
     print("Motion detected!")
     time_now = datetime.utcnow()
-    file_name = str(time_now).replace(' ', '_') + ".mp4"
+    file_name = str(time_now).replace(' ', '_').replace('-','_').replace(':', '_') + ".mp4"
     video_config = picam2.create_video_configuration()
     picam2.configure(video_config)
     print(f'{datetime.now()}: Video configuration:')
