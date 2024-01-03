@@ -16,6 +16,7 @@ def notify_motion_detected(debug: bool = False):
     post_data = {
         'sensorMediaData':
         {
+            'isMotionDetected': 'yes',
             'dateTimeString': str(datetime.utcnow()),
             'userName': user_name,
             'email': env['EMAIL'],
@@ -57,6 +58,7 @@ def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool = F
     post_data = {
         'sensorMediaData':
         {
+            'isMotionDetected': 'no',
             'dateTimeString': str(post_time),
             's3Url': s3_url,
             'userName': user_name,
