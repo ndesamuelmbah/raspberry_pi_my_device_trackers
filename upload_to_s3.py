@@ -6,12 +6,22 @@ env = os.environ
 bucket_name = env['BUCKET_NAME']
 user_name = env['BOTO3_USER']
 post_header = env['POST_HEADER']
+dates_file = 'dates.txt'
 
 def notify_motion_detected(debug: bool = False):
     '''Sends a POST request to the API Gateway endpoint to notify of a motion event.
     Exceptions: Throws an invalid argument exception if BOTO3_USER or BUCKET_NAME are not set.
     Returns: None
     '''
+    dates = []
+    with open(dates_file, 'r') as f:
+        dates = f.read().splitlines()
+        f.close()
+    if len(dates) > 0 and (datetime.now() - datetime.strptime(dates[-1], '%Y-%m-%d %H:%M:%S.%f')).total_seconds() < 9:
+        if debug:
+            print('Already notified this.')
+        return None
+
     post_url = env['POST_URL']
     post_data = {
         'sensorMediaData':
@@ -27,6 +37,9 @@ def notify_motion_detected(debug: bool = False):
     response = requests.post(post_url, headers=headers, json=post_data)
     if debug:
         print(f'The POST request to {post_url} returned {response.status_code} with the body {response.text}.')
+    with open(dates_file, 'w') as f:
+        f.write(str(datetime.now()))
+        f.close()
 
 
 def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool = False):
