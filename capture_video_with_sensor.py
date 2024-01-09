@@ -3,11 +3,14 @@ from picamera2.encoders import H264Encoder
 from picamera2.outputs import FfmpegOutput
 from picamera2 import Picamera2
 from upload_to_s3 import upload_file_to_s3, notify_motion_detected
+from sams_motion_sensor import SamsMotionSensor
 import time
 from datetime import datetime
 Picamera2.set_logging(Picamera2.ERROR)
 
-pir = MotionSensor(12)
+sensor_pin_number = 12
+#pir = MotionSensor(sensor_pin_number)
+pir = SamsMotionSensor(sensor_pin_number, sample_rate=10, sample_wait=1, threshold=0.2, queue_len=5, average=max)
 is_capturing = False
 while True:
     # print("Waiting for motion...")
