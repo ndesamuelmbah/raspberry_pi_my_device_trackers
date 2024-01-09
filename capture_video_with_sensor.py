@@ -18,7 +18,7 @@ while True:
     picam2 = Picamera2()
     print(f"{datetime.now()}: Motion detected!")
     time_now = datetime.utcnow()
-    file_name = str(time_now).replace(' ', '_').replace('.','_').replace(':', '_') + ".mp4"
+    file_name = time_now.strftime('%Y-%m-%d-%H-%M-%S-%f') + ".mp4"
     video_config = picam2.create_video_configuration()
     picam2.configure(video_config)
     encoder = H264Encoder(10000000)
