@@ -6,6 +6,8 @@ env = os.environ
 bucket_name = env['BUCKET_NAME']
 user_name = env['BOTO3_USER']
 post_header = env['POST_HEADER']
+motion_header = env['MOTION_HEADER']
+email = env['EMAIL']
 dates_file = 'dates.txt'
 
 def notify_motion_detected(debug: bool = False):
@@ -29,8 +31,8 @@ def notify_motion_detected(debug: bool = False):
             'isMotionDetected': 'yes',
             'dateTimeString': str(datetime.utcnow()),
             'userName': user_name,
-            'email': env['EMAIL'],
-            'description': "Samuel's Raspberry Pi Noticed A Motion Event."
+            'email': email,
+            'description': motion_header
         }
     }
     headers = { 'header': post_header}
@@ -75,8 +77,8 @@ def upload_file_to_s3(local_file_path: str, post_time: datetime, debug: bool = F
             'dateTimeString': str(post_time),
             's3Url': s3_url,
             'userName': user_name,
-            'email': env['EMAIL'],
-            'description': "Samuel's Raspberry Pi Noticed A Motion Event."
+            'email': email,
+            'description':  motion_header
         }
     }
     headers = { 'header': post_header}

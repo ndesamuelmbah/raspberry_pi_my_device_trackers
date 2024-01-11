@@ -5,3 +5,4 @@ BOTO3_USER=username_for_determining_folder_to_save_media
 POST_URL=https://my_api_domain.com/your_end_point
 BUCKET_NAME=my_s3_bucket_name
 EMAIL=example@domain.com
+MOTION_HEADER=Motion has been detected in your garage.
