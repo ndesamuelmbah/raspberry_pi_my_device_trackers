@@ -1,4 +1,6 @@
 # /etc/systemd/system/your_service_name.service
+# After creating this configuration file, do not forget to create all the files needed for this script to run.
+# See the example files in this folder for the sample contents.
 
 [Unit]
 Description=My Python Project to Monitor Motion in Garage
@@ -15,3 +17,7 @@ StandardError=append:/var/log/your_service_name/your_service_name.err.log
 
 [Install]
 WantedBy=default.target
+
+# After all the required files have been created, run the command below to enable and start your service
+# sudo systemctl enable your_service_name.service
+# sudo systemctl start your_service_name.service
