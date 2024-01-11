@@ -4,10 +4,12 @@ from picamera2.outputs import FfmpegOutput
 from picamera2 import Picamera2
 from upload_to_s3 import upload_file_to_s3, notify_motion_detected
 from sams_motion_sensor import SamsMotionSensor
-import time
+import time, sys
 from datetime import datetime
 Picamera2.set_logging(Picamera2.ERROR)
 
+args = sys.argv
+debug = len(args) > 1 and args[1].lower() == "debug"
 sensor_pin_number = 12
 #pir = MotionSensor(sensor_pin_number)
 pir = SamsMotionSensor(sensor_pin_number, sample_rate=10, sample_wait=1, threshold=0.2, queue_len=5, average=max)
@@ -17,7 +19,8 @@ while True:
     pir.wait_for_motion()
     if(is_capturing):
         continue
-    notify_motion_detected()
+    if(not debug):
+        notify_motion_detected()
     picam2 = Picamera2()
     print(f"{datetime.now()}: Motion detected!")
     time_now = datetime.utcnow()
@@ -37,7 +40,7 @@ while True:
     picam2.stop_recording()
     picam2.close()
     is_capturing = False
-    time.sleep(1)
-    upload_file_to_s3(local_file_path=file_name, post_time=time_now, debug=True)
-
+    if(not debug):
+        time.sleep(1)
+        upload_file_to_s3(local_file_path=file_name, post_time=time_now, debug=True)
     print(f"{datetime.now()}: Motion stopped!")
