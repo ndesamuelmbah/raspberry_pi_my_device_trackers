@@ -35,8 +35,13 @@ while True:
     print(f'{name} {datetime.now()} Set up the output: ')
     is_capturing = True
     picam2.start_recording(encoder, output)
-    time.sleep(3)
     pir.wait_for_no_motion()
+    end_time = datetime.utcnow()
+    time_diff = (end_time - time_now).total_seconds()
+    if(time_diff < 2):
+        time.sleep(7)
+    else:
+        time.sleep(5)
     print(f'{name} {datetime.now()} Recording completed after {(datetime.utcnow()-time_now).total_seconds()} seconds')
     picam2.stop_recording()
     picam2.close()
