@@ -1,5 +1,6 @@
-import boto3, os, requests
+import boto3, os, requests, cv2
 from datetime import datetime, timedelta
+from itertools import permutations
 
 # Replace these with your own values
 env = os.environ
@@ -9,6 +10,9 @@ post_header = env['POST_HEADER']
 motion_header = env['MOTION_HEADER']
 email = env['EMAIL']
 dates_file = 'dates.txt'
+
+#net = cv2.dnn.readNetFromTensorflow('ssd_mobilenet_v1_coco/frozen_inference_graph.pb', 'ssd_mobilenet_v1_coco.pbtxt')
+
 
 def notify_motion_detected(debug: bool = False):
     '''Sends a POST request to the API Gateway endpoint to notify of a motion event.
