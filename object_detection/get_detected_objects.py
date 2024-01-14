@@ -6,7 +6,8 @@ def get_detected_objects(img, thres, nms, net, supported_object_names, draw=True
     if len(objects) == 0: objects = supported_object_names
     object_info =[]
     if len(class_ids) != 0:
-        for object_id, confidence,box in zip(class_ids.flatten(),confs.flatten(),bbox):
+        print(f"Found {len(class_ids)} objects in the image {img.shape}, class_ids: {class_ids}, confs: {confs}, bbox: {bbox}")
+        for object_id, confidence, box in zip(class_ids.flatten(), confs.flatten(), bbox):
             object_name = supported_object_names[object_id - 1]
             if object_name in objects:
                 object_info.append([box,object_name])

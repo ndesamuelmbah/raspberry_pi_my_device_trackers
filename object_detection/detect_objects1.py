@@ -45,7 +45,9 @@ cap.set(3,640)
 cap.set(cv2.CAP_PROP_FPS, 15)
 # Set up video writer
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('output.avi', fourcc, 20.0, (640, 480))
+time_now = datetime.now()
+output_file = f"{time_now.strftime('%Y-%m-%d-%H-%M-%S-%f')}.avi"
+out = cv2.VideoWriter(output_file, fourcc, 20.0, (640, 480))
 #cap.set(4,480)
 #cap.set(10,70)
 
