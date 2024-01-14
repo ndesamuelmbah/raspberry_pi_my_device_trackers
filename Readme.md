@@ -40,7 +40,7 @@ Do the same thing for `your_service_name.conf.example` for example if your proje
 Note: If you do not want to deal with provisioning users and accounts, you use the contents of the contents of `your_service_name.conf.example` in your `your_service_name.conf.` and when running your service, do `python capture_video_with_sensor.py debug` instead `python capture_video_with_sensor.py [production]`.
 This file contains environment variables that would be used for saving your files in the cloud.
 You can skip all of these and update the code to not save your video files in the cloud.
-Note: if you are saving files to S3 as demonstrated in this example, you will first need to install boto3. You can do so by `sudo apt-get install python3-boto3`. Of course you will also need to provision the s3 bucket, and create the IAM user and grant them access to S3 so they can store files.
+Note: if you are saving files to S3 as demonstrated in this example, you will first need to install boto3. You can do so by `sudo apt-get install python3-boto3`. Of course you will also need to provision the s3 bucket, and create the IAM user and grant them access to S3 so they can store files. In this project, I assumed you have set up the IAM user on your raspberry pi by running `aws configure` after installing aws cli using `sudo apt-get install awscli`. Do make sure you IAM user has programmatic access and write access to your s3 bucket.
 
 Finally, run
 `python capture_video_with_sensor.py debug`
