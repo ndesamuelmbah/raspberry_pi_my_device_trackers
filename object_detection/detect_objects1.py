@@ -1,10 +1,17 @@
 import cv2
-import time
+import time, sys
 from datetime import datetime
 
 from get_detected_objects import get_detected_objects
 
 #thres = 0.45 # Threshold to detect object
+camera_index = 0
+args = sys.argv
+if len(args) != 2:
+    print("Please provide the the camera index.")
+else:
+    assert args[1].isdigit(), "Please provide a valid camera index."
+    camera_index = int(args[1])
 
 supported_object_names = []
 supported_object_names_files = "coco.names"
@@ -40,7 +47,7 @@ net.setInputSwapRB(True)
 #     return img,object_info
 
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(camera_index)
 cap.set(3,640)
 cap.set(cv2.CAP_PROP_FPS, 15)
 # Set up video writer
