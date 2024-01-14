@@ -8,7 +8,7 @@ from get_detected_objects import get_detected_objects
 camera_index = 0
 args = sys.argv
 if len(args) != 2:
-    print("Please provide the the camera index.")
+    print("You are running in with default camera index 0. If you want to use a different camera, please provide the camera index as an argument to this script.")
 else:
     assert args[1].isdigit(), "Please provide a valid camera index."
     camera_index = int(args[1])
@@ -46,27 +46,37 @@ net.setInputSwapRB(True)
 
 #     return img,object_info
 
-
+print(f'{datetime.now()}: Starting to set video camera index ...')
 cap = cv2.VideoCapture(camera_index)
+print(f'{datetime.now()}: Set camera to camera index {camera_index}.')
 cap.set(3,640)
+print(f'{datetime.now()}: Set camera width to 640.')
+#cap.set(4,480)
 cap.set(cv2.CAP_PROP_FPS, 15)
+print(f'{datetime.now()}: Set camera frame rate to 15.')
 # Set up video writer
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
+print(f'{datetime.now()}: Set up video writer for xvid with fourcc.')
 time_now = datetime.now()
 output_file = f"{time_now.strftime('%Y-%m-%d-%H-%M-%S-%f')}.avi"
 out = cv2.VideoWriter(output_file, fourcc, 20.0, (640, 480))
+print(f'{datetime.now()}: Set up video writer for output file {output_file}.')
 #cap.set(4,480)
 #cap.set(10,70)
 
 
 while True:
     start = datetime.now()
+    print(f'{datetime.now()}: Starting to read from camera ...')
     success, img = cap.read()
+    print(f'{datetime.now()}: Read from camera.')
     result, object_info = get_detected_objects(img,0.45,0.2, net, supported_object_names, objects=[])
+    print(f'{datetime.now()}: Got detected objects.')
     #print(object_info)
-    cv2.imshow("Output",img)
+    #cv2.imshow("Output",img)
     end = datetime.now()
     out.write(img)
+    print(f'{datetime.now()}: Wrote frame to video file.')
     print(f'Completed in {(end - start).total_seconds()} seconds.')
     #time.sleep(1)
     cv2.waitKey(1)
