@@ -9,6 +9,7 @@ In this project, I use a raspberry pi, PIR (Passive Infrared Radar) motion senso
 - [SetUp](#setup)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Object Detection](#object-detection)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -21,9 +22,10 @@ Raspberry Pi camera (I used Raspberry Pi Camera Module V3 NOIR Wide (120 degrees
 Jumper Wires as needed.
 A little bit of python coding skills.
 
-## setup
+## Setup
 Connect your raspberry pi camera [Video Help](https://youtu.be/yhM1NhD-kGs?t=34)
 Connect your PIR motion Sensor [Video Help](https://www.youtube.com/watch?v=Q4_i5j64hdw)
+Object detection on raspberry pi with openCV [Video Tutorial](https://www.youtube.com/watch?v=iOTWZI4RHA8)
 And ssh into your raspberry pi (or connect it to your computer) or find any equivallent way of getting access to the computer.
 
 ## Usage
@@ -43,6 +45,14 @@ Note: if you are saving files to S3 as demonstrated in this example, you will fi
 Finally, run
 `python capture_video_with_sensor.py debug`
 Note thave videos will be saved in your project directory and you may need to clean up occationally.
+
+## Object Detection
+I have added some extra files related to object detection. Those files can be found in  `object_detection` folder. You can use those file for learning how to detect object.
+The code in this section is intended to be used to detect specific objects in the camera.
+
+One could easily update the `capture_video_with_sensor.py` script to capture motion when specific objects are detected. You do this be specifying the specific object names in the `get_detected_objects`  like `get_detected_objects(img,0.45,0.2, objects=['person','bicycle'])`. See `object_detection/coco.names` for a full list of 91 object types that can be detected.
+[This YouTube Video](https://www.youtube.com/watch?v=iOTWZI4RHA8) got me started with the motion detection piece.
+
 
 ## Contributing
 PRs are welcome. Propose ways to improve this. It is my pleasure.
